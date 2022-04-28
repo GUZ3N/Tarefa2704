@@ -12,7 +12,7 @@ export class HomePage {
 
   async showAdd(){
     const alert = await this.alertCtrl.create({
-      header: 'O que você deseja fazer?',
+      header: 'Qual sua próxima tarefa?',
       inputs: [
         {
           name: 'tarefa1',
