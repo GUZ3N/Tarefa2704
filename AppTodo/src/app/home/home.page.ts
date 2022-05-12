@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActionSheetController, AlertButton, AlertController, ToastController } from '@ionic/angular';
 import { __await } from 'tslib';
+import { TodoService } from '../services/todo.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomePage {
 
   tarefas: any[]=[];
 
-  constructor(private actionSheetCtrl : ActionSheetController, private alertCtrl : AlertController, private toastCtrl: ToastController) {
+  constructor(private todoService: TodoService ,private actionSheetCtrl : ActionSheetController, private alertCtrl : AlertController, private toastCtrl: ToastController) {
     let tarefaSalva = localStorage.getItem('tarefaUsuario');
 
     if (tarefaSalva != null) {
@@ -92,9 +93,15 @@ export class HomePage {
       return;
     }
 
-    const tarefa = { nome:novaTarefa, realizada: false};
+    const tarefa = { nome:novaTarefa, realizada: 0};
     this.tarefas.push(tarefa);
-    this.salvaLocalStorage();
+    this.todoService.adicionaTarefa(tarefa.nome, tarefa.realizada)
+    .then((resposta)=>{
+      console.log(resposta);
+    })
+    .catch((erro)=>{
+      console.error(erro);
+    });
   }
 
   salvaLocalStorage(){
