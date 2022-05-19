@@ -12,8 +12,7 @@ import { TodoService } from './services/todo.service';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
-    TodoService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  {provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
 })
